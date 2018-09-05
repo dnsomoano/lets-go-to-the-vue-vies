@@ -2,16 +2,18 @@
     <section>
         <header>Search for a movie:</header>
         <input type="text" placeholder="Movie title here"/>
-        <header>{{movies[0].title}}</header>
-        <img src="https://placekitten.com/408/287" alt="kats"/>
-        <header>Release date</header>
-        <p>Movie overview</p>
+        <ul>
+            <MovieResults v-for="movie in movies" v-bind:key="movie.id" v-bind:movieResultsFromSearch="movie" />
+        </ul>
         </section>
 </template>
 
 <script>
 export default {
   name: "SearchMovie",
+  components: {
+      MovieResults
+  },
   data: function() {
     return {
       movies: [{}]
@@ -23,10 +25,10 @@ export default {
     fetch(URL)
       .then(resp => resp.json())
       .then(data => {
-          console.log(data)
-          this.movies = data.results;
+        console.log(data);
+        this.movies = data.results;
       });
-        // console.log(this.movies);
+    // console.log(this.movies);
   }
 };
 </script>
