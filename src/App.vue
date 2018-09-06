@@ -1,23 +1,26 @@
 <template>
   <div id="app">
-    <SearchMovie />
+    <header>Search for a movie:</header>
+    <!-- TODO make the search bar functional by storing the input and passing it down to MovieList child -->
+    <input type="text" placeholder="Movie title here"/>
+    <MovieList />
   </div>
 </template>
 
 <script>
-import SearchMovie from './components/SearchMovie.vue'
+import MovieList from "./components/MovieList.vue";
 
 export default {
-  name: 'app',
+  name: "app",
   components: {
-    SearchMovie
+    MovieList
   }
-}
+};
 </script>
 
-<style>
+<style scoped>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

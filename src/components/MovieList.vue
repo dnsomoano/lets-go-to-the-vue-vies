@@ -1,24 +1,25 @@
 <template>
     <section>
-        <header>Search for a movie:</header>
-        <input type="text" placeholder="Movie title here"/>
         <ul>
-            <MovieResults v-for="movie in movies" v-bind:key="movie.id" v-bind:movieResultsFromSearch="movie" />
+            <MovieDetail v-for="movie in movies" :key="movie.id" :movieResult="movie" />
         </ul>
         </section>
 </template>
 
 <script>
+import MovieDetail from "./MovieDetail.vue";
+
 export default {
-  name: "SearchMovie",
+  name: "MovieList",
   components: {
-      MovieResults
+    MovieDetail
   },
   data: function() {
     return {
-      movies: [{}]
+      movies: []
     };
   },
+  // TODO pass searchTerm as a prop to query on line 24
   mounted: function() {
     const URL = `https://api.themoviedb.org/3/search/movie?api_key=e99344bac0d2a5336621a8492eeb2e74&language=en-US&query=meg&page=1&include_adult=false`;
 
@@ -28,7 +29,6 @@ export default {
         console.log(data);
         this.movies = data.results;
       });
-    // console.log(this.movies);
   }
 };
 </script>
