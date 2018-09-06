@@ -19,48 +19,27 @@ export default {
     MovieDetail
   },
   props: {
-    searchQuery: String
+    searchQuery: String,
+    movies:Array
   },
-  data: function() {
-    return {
-      // searchTerm: "",
-      // inputTerm: "",
-      movies: []
-    };
-  },
+  // data: function() {
+  //   return {
+  //     // searchTerm: "",
+  //     // inputTerm: "",
+  //     movies: []
+  //   };
+  // },
   methods: {
     // addSearchTerm: function() {
     //   console.log(this.searchTerm);
     //   this.searchTerm = this.inputTerm;
     //   console.log(this.searchTerm);
     // },
-    getSearchResults: function() {
-      console.log("getting", this.searchQuery)
-      if (this.searchTerm) {
-        let URL = `https://api.themoviedb.org/3/search/movie?api_key=e99344bac0d2a5336621a8492eeb2e74&language=en-US&query=${
-          this.searchQuery
-        }&page=1&include_adult=false`;
-        console.log(URL);
-        fetch(URL)
-          .then(resp => resp.json())
-          .then(data => {
-            console.log(data);
-            this.movies = data.results;
-          });
-      } else {
-        const TRENDING = `https://api.themoviedb.org/3/trending/all/day?api_key=e99344bac0d2a5336621a8492eeb2e74`;
-        fetch(TRENDING)
-          .then(resp => resp.json())
-          .then(data => {
-            console.log(data);
-            this.movies = data.results;
-          });
-      }
-    }
+   
   },
   // TODO pass searchTerm as a prop to query on line 24
   mounted: function() {
-    this.getSearchResults();
+    // this.getSearchResults();
   },
   updated:function(){
     // this.getSearchResults();
@@ -77,6 +56,7 @@ export default {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
+  font-size: 1.5em;
   margin: 0.5em;
   text-align: center;
 }

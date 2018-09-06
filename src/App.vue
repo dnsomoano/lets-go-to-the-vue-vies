@@ -2,11 +2,11 @@
   <div id="app">
     <header>Search for a movie:</header>
     <!-- TODO make the search bar functional by storing the input and passing it down to MovieList child -->
-    <form v-on:submit.prevent="addSearchTerm">
-      <input type="text" placeholder="Movie title here" v-model="inputTerm" />
-      <button type="button" name="search-button">Search</button>
+    <form v-on:submit.prevent="getSearchResults">
+      <input type="text" placeholder="Movie title here" v-on:focus="searchTerm = ''" v-model="searchTerm" />
+      <button type="submit" name="search-button">Search</button>
     </form>
-    <MovieList :searchQuery="searchTerm" />
+    <MovieList :movies="movies" />
   </div>
 </template>
 
@@ -21,15 +21,38 @@ export default {
   data: function() {
     return {
       searchTerm: "",
-      inputTerm: ""
+      movies:[]
     };
   },
+  mounted:function(){
+    this.getSearchResults()
+  },
   methods: {
-    addSearchTerm: function() {
-      console.log("Button clicked");
-      this.searchTerm = this.inputTerm;
-      console.log("The search term is", this.searchTerm);
-      console.log("The inputTerm term is", this.inputTerm);
+     testing:function(){
+       console.log("ttesting", this.searchTerm)
+     },
+     getSearchResults: function() {
+      console.log("getting", this.searchTerm)
+      if (this.searchTerm) {
+        let URL = `https://api.themoviedb.org/3/search/movie?api_key=e99344bac0d2a5336621a8492eeb2e74&language=en-US&query=${
+          this.searchTerm
+        }&page=1&include_adult=true`;
+        console.log(URL);
+        fetch(URL)
+          .then(resp => resp.json())
+          .then(data => {
+            console.log(data);
+            this.movies = data.results;
+          });
+      } else {
+        const TRENDING = `https://api.themoviedb.org/3/trending/all/day?api_key=e99344bac0d2a5336621a8492eeb2e74`;
+        fetch(TRENDING)
+          .then(resp => resp.json())
+          .then(data => {
+            console.log(data);
+            this.movies = data.results;
+          });
+      }
     }
   }
 };
