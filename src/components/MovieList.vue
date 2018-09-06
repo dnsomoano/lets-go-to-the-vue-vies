@@ -1,9 +1,9 @@
 <template>
     <section>
-      <form v-on:submit.prevent="addSearchTerm">
+      <!-- <form v-on:submit.prevent="addSearchTerm">
         <input type="text" placeholder="Movie title here" v-model="inputTerm" v-on:keyup.enter="addSearchTerm" />
         <button>Search</button>
-      </form>
+      </form> -->
         <section class="movie-list">
             <MovieDetail v-for="movie in movies" :key="movie.id" :movieResult="movie" />
         </section>
@@ -18,26 +18,27 @@ export default {
   components: {
     MovieDetail
   },
-  // props: {
-  //   searchQuery: String
-  // },
+  props: {
+    searchQuery: String
+  },
   data: function() {
     return {
-      searchTerm: "",
-      inputTerm: "",
+      // searchTerm: "",
+      // inputTerm: "",
       movies: []
     };
   },
   methods: {
-    addSearchTerm: function() {
-      console.log(this.searchTerm);
-      this.searchTerm = this.inputTerm;
-      console.log(this.searchTerm);
-    },
+    // addSearchTerm: function() {
+    //   console.log(this.searchTerm);
+    //   this.searchTerm = this.inputTerm;
+    //   console.log(this.searchTerm);
+    // },
     getSearchResults: function() {
+      console.log("getting", this.searchQuery)
       if (this.searchTerm) {
         let URL = `https://api.themoviedb.org/3/search/movie?api_key=e99344bac0d2a5336621a8492eeb2e74&language=en-US&query=${
-          this.searchTerm
+          this.searchQuery
         }&page=1&include_adult=false`;
         console.log(URL);
         fetch(URL)
@@ -61,6 +62,9 @@ export default {
   mounted: function() {
     this.getSearchResults();
   },
+  updated:function(){
+    // this.getSearchResults();
+  }
   // computed: function() {
   //   this.getSearchResults();
   // }
@@ -72,7 +76,8 @@ export default {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: center;
   margin: 0.5em;
+  text-align: center;
 }
 </style>
