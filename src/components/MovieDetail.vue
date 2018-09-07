@@ -45,11 +45,14 @@ export default {
 
 .movie-box ul {
   background-color: whitesmoke;
+  margin: 0.3em;
+  padding: 0em;
 }
 
 .title-style {
   background-color: whitesmoke;
   font-weight: bold;
+  margin: 0em;
   margin-bottom: 0.3em;
 }
 
@@ -58,7 +61,7 @@ export default {
   border: 1px outset #8A8A8A;
   border-radius: 0.2em;
   color: black;
-  margin-left: 2.5em;
+  margin: 0em;
   max-width: 16em;
   padding: 0.3em;
   text-align: center;

@@ -4,7 +4,7 @@
     <!-- TODO make the search bar functional by storing the input and passing it down to MovieList child -->
     <form class="form-style" v-on:submit.prevent="getSearchResults">
       <input class="search-bar" type="text" placeholder="Movie title here..." v-on:focus="searchTerm = ''" v-model="searchTerm" />
-      <button class="search-bar" type="submit" name="search-button">Search</button>
+      <button class="search-button" type="submit" name="search-button">Search</button>
     </form>
     <MovieList :movies="movies" />
     <footer id="dev-footer">®Created by Daniel N Somoano</footer>
@@ -89,6 +89,12 @@ export default {
 .search-bar {
   background-color: white;
   border-radius: 0.2em;
+}
+
+.search-button {
+  background-color: #2C3E50;
+  border-radius: 0.2em;
+  color: whitesmoke;
 }
 
 #dev-footer {
