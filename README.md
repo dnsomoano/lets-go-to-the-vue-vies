@@ -12,8 +12,8 @@ Using a the movie APIs, you will be creating a sample project to continue workin
 * You will be using this endpoint = https://developers.themoviedb.org/3/search/search-movies
 # Explorer Mode #
 - [X] Create a page that has a textbox that allows the user to type in a search term.
-- [ ] Using the endpoint above, pass the endpoint what the user typed in and display the results,
-- [ ] Style your page to make your website look like a modern site.
+- [X] Using the endpoint above, pass the endpoint what the user typed in and display the results,
+- [X] Style your page to make your website look like a modern site.
 - [X] Add a Section to your page that shows the user the trending movies. Use this endpoint: https://developers.themoviedb.org/3/trending/get-trending
 # Adventure Mode #
 - [ ] Allow the user to save movies to local storage to look at later

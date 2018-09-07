@@ -20,7 +20,7 @@ export default {
   },
   props: {
     searchQuery: String,
-    movies:Array
+    movies: Array
   },
   // data: function() {
   //   return {
@@ -37,16 +37,9 @@ export default {
     // },
    
   },
-  // TODO pass searchTerm as a prop to query on line 24
   mounted: function() {
     // this.getSearchResults();
-  },
-  updated:function(){
-    // this.getSearchResults();
   }
-  // computed: function() {
-  //   this.getSearchResults();
-  // }
 };
 </script>
 
@@ -57,7 +50,10 @@ export default {
   flex-wrap: wrap;
   justify-content: center;
   font-size: 1.5em;
-  margin: 0.5em;
   text-align: center;
+}
+
+* {
+  background-color: #2c3e50;
 }
 </style>
