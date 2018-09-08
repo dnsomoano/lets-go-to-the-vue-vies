@@ -1,13 +1,18 @@
 <template>
   <div id="app">
-    <header class="search-title">Search Movie By Title:</header>
-    <!-- TODO make the search bar functional by storing the input and passing it down to MovieList child -->
-    <form class="form-style" v-on:submit.prevent="getSearchResults">
-      <input class="search-bar" type="text" placeholder="Movie title here..." v-on:focus="searchTerm = ''" v-model="searchTerm" />
-      <button class="search-button" type="submit" name="search-button">Search</button>
-    </form>
+    <header class="title">
+      <!-- <img alt="MovieDB logo" src="./assets/the-movie-db-logo.svg"> -->
+      The Movie DB
+    </header>
+    <section class="search-container">
+      <header>Search by Title:</header>
+      <form class="form-style" v-on:submit.prevent="getSearchResults">
+        <input class="search-bar" type="text" placeholder="Movie title here..." v-on:focus="searchTerm = ''" v-model="searchTerm" />
+        <button class="search-button" type="submit" name="search-button">Search</button>
+        </form>
+    </section>
     <MovieList :movies="movies" />
-    <footer id="dev-footer">®Created by Daniel N Somoano</footer>
+    <footer id="dev-footer">® Created by Daniel N Somoano</footer>
   </div>
 </template>
 
@@ -60,10 +65,17 @@ export default {
 </script>
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css?family=Caveat");
+/* Imported fonts */
+/* Title font */
+@import url("https://fonts.googleapis.com/css?family=Six+Caps");
+/* Body font */
+@import url("https://fonts.googleapis.com/css?family=Archivo+Narrow");
+/* @import url("https://fonts.googleapis.com/css?family=Caveat"); */
+
 #app {
   /* font-family: "Avenir", Helvetica, Arial, sans-serif; */
-  font-family: "Caveat", cursive;
+  /* font-family: "Caveat", cursive; */
+  font-family: "Archivo Narrow", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -71,14 +83,34 @@ export default {
   background-color: #373636;
 }
 
+/* #dc493a is for background of page */
 * {
-  background-color: #2c3e50;
+  background-color: #dc493a;
 }
 
-.search-title {
+/* #373636 is for banners, movie titles, release dates, overviews, and footer */
+/* #e8eddf is for titles, search bar & button */
+/* #CFDBD5 is for movie containers holding the title, poster, and overview */
+/* #AA8F66 is for overview container */
+.title {
   background-color: #373636;
-  color: whitesmoke;
-  font-size: 2em;
+  color: #e8eddf;
+  font-family: "Six Caps", sans-serif;
+  font-size: 3.5em;
+}
+
+.search-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  color: #e8eddf;
+  margin-top: 1.2em;
+  padding: 0.5em;
+}
+
+.search-container header {
+  color: #e8eddf;
+  margin-right: 0.3em;
 }
 
 .form-style {
@@ -87,19 +119,23 @@ export default {
 }
 
 .search-bar {
-  background-color: white;
+  background-color: #cfdbd5;
   border-radius: 0.2em;
 }
 
 .search-button {
-  background-color: #2C3E50;
+  background-color: #373636;
   border-radius: 0.2em;
-  color: whitesmoke;
+  color: #e8eddf;
 }
 
 #dev-footer {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-start;
   background-color: #373636;
-  color: whitesmoke;
-  font-size: 1em;
+  color: #e8eddf;
+  font-size: 0.8em;
+  margin-right: 0.4em;
 }
 </style>

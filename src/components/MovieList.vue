@@ -49,11 +49,11 @@ export default {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-  font-size: 1.5em;
   text-align: center;
 }
 
+/* #dc493a is for background of page */
 * {
-  background-color: #2c3e50;
+  background-color: #DC493A;
 }
 </style>
