@@ -65,6 +65,11 @@ export default {
 </script>
 
 <style scoped>
+/* #dc493a is for background of page */
+/* #373636 is for banners, movie titles, release dates, overviews, and footer */
+/* #e8eddf is for titles, search bar & button */
+/* #CFDBD5 is for movie containers holding the title, poster, and overview */
+/* #AA8F66 is for overview container */
 /* Imported fonts */
 /* Title font */
 @import url("https://fonts.googleapis.com/css?family=Six+Caps");
@@ -83,15 +88,10 @@ export default {
   background-color: #373636;
 }
 
-/* #dc493a is for background of page */
 * {
   background-color: #dc493a;
 }
 
-/* #373636 is for banners, movie titles, release dates, overviews, and footer */
-/* #e8eddf is for titles, search bar & button */
-/* #CFDBD5 is for movie containers holding the title, poster, and overview */
-/* #AA8F66 is for overview container */
 .title {
   background-color: #373636;
   color: #e8eddf;

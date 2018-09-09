@@ -5,7 +5,7 @@
         <button>Search</button>
       </form> -->
         <section class="movie-list">
-            <MovieDetail v-for="movie in movies" :key="movie.id" :movieResult="movie" />
+            <MovieDetail v-for="movie in movies" :key="movie.id" :movieResult="movie" :addToLocalStorage="addMovieToStorage" />
         </section>
     </section>
 </template>
@@ -19,23 +19,36 @@ export default {
     MovieDetail
   },
   props: {
-    searchQuery: String,
     movies: Array
   },
-  // data: function() {
-  //   return {
-  //     // searchTerm: "",
-  //     // inputTerm: "",
-  //     movies: []
-  //   };
-  // },
+  data: function() {
+    return {
+      savedMovies: []
+      // disableButton: false
+      // //     // searchTerm: "",
+      // //     // inputTerm: "",
+      // //     movies: []
+    };
+  },
   methods: {
     // addSearchTerm: function() {
     //   console.log(this.searchTerm);
     //   this.searchTerm = this.inputTerm;
     //   console.log(this.searchTerm);
     // },
-   
+    addMovieToStorage(movieTitle) {
+      console.log(typeof movieTitle);
+      const pick = this.savedMovies.concat(movieTitle);
+      localStorage.setItem("storedMovies", pick);
+      // console.log(typeof localStorage.saved - Movies);
+      // TODO save more than one movie to local storage
+      // TODO fix button disable
+      this.savedMovies = pick;
+      // dbg
+      console.log("Saved movies are:", this.savedMovies);
+      console.log(localStorage.storedMovies);
+      this.disableButton = true;
+    }
   },
   mounted: function() {
     // this.getSearchResults();
@@ -54,6 +67,6 @@ export default {
 
 /* #dc493a is for background of page */
 * {
-  background-color: #DC493A;
+  background-color: #dc493a;
 }
 </style>

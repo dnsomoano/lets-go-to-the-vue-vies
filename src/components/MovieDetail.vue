@@ -2,10 +2,11 @@
 <section class="movie-box">
   <ul>
     <li>
-    <header class="title-style">{{movieResult.title}}</header>
-    <img class="poster" :src="addImage(movieResult.poster_path)" />
-    <header class="release-date">Release Date: {{movieResult.release_date}}</header>
-    <section class="box-synopsis">{{movieResult.overview}}</section>
+      <header class="title-style">{{movieResult.title}}</header>
+      <img class="poster" :src="addImage(movieResult.poster_path)" />
+      <header class="release-date"><span class="subtext">Release Date:</span> {{movieResult.release_date}}</header>
+      <section class="box-synopsis">{{movieResult.overview}}</section>
+      <button class="save-button" type="submit" @click="addToLocalStorage(movieResult.title)">Save for Later</button>
     </li>
   </ul>
 </section>
@@ -18,8 +19,15 @@ export default {
     movieResult: Object
   },
   data: function() {
-    return {};
+    return {
+      moviePick: ""
+    };
   },
+  // mounted() {
+  //   if (localStorage.storedMovies) {
+  //     this.savedMovies = localStorage.storedMovies;
+  //   }
+  // },
   methods: {
     addImage: function(poster_path) {
       return "https://image.tmdb.org/t/p/w500/" + poster_path;
@@ -31,13 +39,13 @@ export default {
 <style scoped>
 /* Imported fonts */
 /* Title font */
-@import url('https://fonts.googleapis.com/css?family=Six+Caps');
+@import url("https://fonts.googleapis.com/css?family=Six+Caps");
 /* Body font */
-@import url('https://fonts.googleapis.com/css?family=Archivo+Narrow');
+@import url("https://fonts.googleapis.com/css?family=Archivo+Narrow");
 /* @import url("https://fonts.googleapis.com/css?family=Caveat"); */
 
 * {
-  background-color: #2c3e50;
+  background-color: #dc493a;
 }
 
 /* #CFDBD5 is for movie containers holding the title, poster, and overview */
@@ -46,7 +54,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #CFDBD5;
+  background-color: #cfdbd5;
   border: 0.2em double #373636;
   border-radius: 0.5em;
   text-align: center;
@@ -59,7 +67,7 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #CFDBD5;
+  background-color: #cfdbd5;
   margin: 0.3em;
   padding: 0em;
 }
@@ -68,13 +76,14 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #CFDBD5;
+  background-color: #cfdbd5;
   max-width: 18em;
 }
 
 .title-style {
-  background-color: #CFDBD5;
-  font-family: 'Six Caps', sans-serif;
+  background-color: #cfdbd5;
+  color: #373636;
+  font-family: "Six Caps", sans-serif;
   font-size: 2.2em;
   font-weight: bold;
   margin: 0em;
@@ -89,11 +98,18 @@ export default {
 }
 
 .release-date {
-    background-color: #CFDBD5;
-  font-family: 'Six Caps', sans-serif;
+  background-color: #cfdbd5;
+  font-family: "Six Caps", sans-serif;
   font-size: 1.6em;
   margin: 0em;
   margin-bottom: 0.3em;
+}
+
+.subtext {
+  background-color: #cfdbd5;
+  color: #373636;
+  font-size: 1em;
+  font-weight: 600;
 }
 
 /* #AA8F66 is for overview container */
@@ -101,11 +117,11 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #AA8F66;
+  background-color: #aa8f66;
   border: 1px outset #8a8a8a;
   border-radius: 0.3em;
   color: #373636;
-  font-family: 'Archivo Narrow', sans-serif;
+  font-family: "Archivo Narrow", sans-serif;
   font-size: 1em;
   margin: 0em;
   max-width: 17em;
@@ -113,4 +129,13 @@ export default {
   text-align: center;
 }
 
+.save-button {
+  display: flex;
+  flex-direction: initial;
+  background-color: #373636;
+  border-radius: 0.3em;
+  color: #e8eddf;
+  margin-top: 0.3em;
+  margin-bottom: 0em;
+}
 </style>
