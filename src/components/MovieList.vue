@@ -5,7 +5,7 @@
         <button>Search</button>
       </form> -->
         <section class="movie-list">
-            <MovieDetail v-for="movie in movies" :key="movie.id" :movieResult="movie" :addToLocalStorage="addMovieToStorage" />
+            <MovieDetail v-for="movie in movies" :key="movie.id" :movieResult="movie" v-on:add-to-save="addToStorage" />
         </section>
     </section>
 </template>
@@ -36,22 +36,21 @@ export default {
     //   this.searchTerm = this.inputTerm;
     //   console.log(this.searchTerm);
     // },
-    addMovieToStorage(movieTitle) {
-      console.log(typeof movieTitle);
-      const pick = this.savedMovies.concat(movieTitle);
-      localStorage.setItem("storedMovies", pick);
-      // console.log(typeof localStorage.saved - Movies);
-      // TODO save more than one movie to local storage
-      // TODO fix button disable
-      this.savedMovies = pick;
-      // dbg
-      console.log("Saved movies are:", this.savedMovies);
-      console.log(localStorage.storedMovies);
-      this.disableButton = true;
-    }
   },
   mounted: function() {
     // this.getSearchResults();
+  },
+  methods: {
+    addToStorage: function(title) {
+      console.log("catching event");
+      console.log(typeof title);
+      // savedMovies.push(title).split(",");
+      // console.log(savedMovies);
+      localStorage.setItem("storedMovies", title);
+      // TODO save more than one movie to local storage
+      // TODO fix button disable
+      // this.disableButton = true;
+    }
   }
 };
 </script>

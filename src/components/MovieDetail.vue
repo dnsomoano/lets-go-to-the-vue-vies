@@ -6,7 +6,7 @@
       <img class="poster" :src="addImage(movieResult.poster_path)" />
       <header class="release-date"><span class="subtext">Release Date:</span> {{movieResult.release_date}}</header>
       <section class="box-synopsis">{{movieResult.overview}}</section>
-      <button class="save-button" type="submit" @click="addToLocalStorage(movieResult.title)">Save for Later</button>
+      <button class="save-button" type="submit" @click="addToSave(movieResult)">Save for Later</button>
     </li>
   </ul>
 </section>
@@ -31,6 +31,10 @@ export default {
   methods: {
     addImage: function(poster_path) {
       return "https://image.tmdb.org/t/p/w500/" + poster_path;
+    },
+    addToSave: function() {
+      console.log("firing event", this.movieResult.title);
+      this.$emit("add-to-save", this.movieResult.title);
     }
   }
 };
