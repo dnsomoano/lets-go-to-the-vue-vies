@@ -30,27 +30,22 @@ export default {
       // //     movies: []
     };
   },
-  methods: {
-    // addSearchTerm: function() {
-    //   console.log(this.searchTerm);
-    //   this.searchTerm = this.inputTerm;
-    //   console.log(this.searchTerm);
-    // },
-  },
   mounted: function() {
     // this.getSearchResults();
   },
   methods: {
     addToStorage: function(title) {
-      console.log("catching event");
-      console.log(typeof title);
-      // savedMovies.push(title).split(",");
-      // console.log(savedMovies);
-      localStorage.setItem("storedMovies", title);
-      // TODO save more than one movie to local storage
+      const bag = this.savedMovies.concat(title);
+      localStorage.setItem("storedMovies", bag);
+      this.savedMovies = bag;
       // TODO fix button disable
       // this.disableButton = true;
     }
+    // addSearchTerm: function() {
+    //   console.log(this.searchTerm);
+    //   this.searchTerm = this.inputTerm;
+    //   console.log(this.searchTerm);
+    // },
   }
 };
 </script>
