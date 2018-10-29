@@ -6,12 +6,13 @@
     </header>
     <section class="search-container">
       <header>Search by Title:</header>
-      <form class="form-style" v-on:submit.prevent="getSearchResults(selection)">
+      <!-- TODO fix selection passing into function getSearchResults, defaults to Tv shows as value. Parameter or otherwise. -->
+      <form class="form-style" v-on:submit.prevent="getSearchResults()">
         <input class="search-bar" type="text" placeholder="Movie title here..." v-on:focus="searchTerm = ''" v-model="searchTerm" />
         <select v-model="selection">
           <option value=""> --Choose media-- </option>
-          <option value="movies">Movies</option>
-          <option value="tv shows" selected>TV Shows</option>
+          <option selected>Movies</option>
+          <option>TV Shows</option>
         </select>
         <button class="search-button" type="submit" name="search-button">Search</button>
         </form>
@@ -51,10 +52,12 @@ export default {
     testing: function() {
       // console.log("testing", this.searchTerm);
     },
-    getSearchResults: function(selection) {
+    getSearchResults: function() {
       // console.log("getting", this.searchTerm);
-      if ((selection = "tv shows")) {
+      if ((this.selection = "TV Shows")) {
         if (this.searchTerm) {
+          console.log(this.selection);
+          // console.log(choice);
           let TV_URL = `https://api.themoviedb.org/3/search/tv?api_key=e99344bac0d2a5336621a8492eeb2e74&language=en-US&query=${
             this.searchTerm
           }&page=1&include_adult=true`;
@@ -66,11 +69,13 @@ export default {
               this.movies = data.results;
             });
         }
-      } else if ((selection = "movies")) {
+      } else if ((this.selection = "Movies")) {
         if (this.searchTerm) {
+          console.log(this.selection);
+          // console.log(choice);
           let MOVIES_URL = `https://api.themoviedb.org/3/search/movies?api_key=e99344bac0d2a5336621a8492eeb2e74&language=en-US&query=${
             this.searchTerm
-          }&page=1`;
+          }&page=1&include_adult=true`;
           // console.log(MOVIES_URL);
           fetch(MOVIES_URL)
             .then(resp => resp.json())
@@ -80,6 +85,7 @@ export default {
             });
         }
       } else {
+        // console.log(choice);
         const TRENDING = `https://api.themoviedb.org/3/trending/all/day?api_key=e99344bac0d2a5336621a8492eeb2e74`;
         fetch(TRENDING)
           .then(resp => resp.json())
