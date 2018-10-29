@@ -2,9 +2,9 @@
 <section class="movie-box">
   <ul>
     <li>
-      <header class="title-style">{{movieResult.title}}</header>
-      <img class="poster" :src="addImage(movieResult.poster_path)" />
-      <header class="release-date"><span class="subtext">Release Date:</span> {{movieResult.release_date}}</header>
+      <header class="title-style">{{movieResult.title || movieResult.name}}</header>
+      <img class="poster" :src="addImage(movieResult.poster_path || movieResult.backdrop_path)" />
+      <header class="release-date"><span class="subtext">Release Date:</span> {{movieResult.release_date || movieResult.first_air_date}}</header>
       <section class="box-synopsis">{{movieResult.overview}}</section>
       <button class="save-button" type="submit" @click="addToSave(movieResult)">Save for Later</button>
     </li>
@@ -33,7 +33,7 @@ export default {
       return "https://image.tmdb.org/t/p/w500/" + poster_path;
     },
     addToSave: function() {
-      console.log("firing event", this.movieResult.title);
+      // console.log("firing event", this.movieResult.title);
       this.$emit("add-to-save", this.movieResult.title);
     }
   }

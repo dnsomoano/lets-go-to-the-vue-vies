@@ -21,7 +21,7 @@ Using a the movie APIs, you will be creating a sample project to continue workin
 
 ### Adventure Mode
 
-- [ ] Allow the user to save movies to local storage to look at later
+- [X] Allow the user to save movies to local storage to look at later
 - [ ] Allow the user to search both TV shows and Movies
 - [ ] Using Vue-Router, set up the site to handle so a use can see more data about a movie or tv show
 - [ ] Explore the API and use any endpoints you find interesting

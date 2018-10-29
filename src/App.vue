@@ -6,13 +6,23 @@
     </header>
     <section class="search-container">
       <header>Search by Title:</header>
-      <form class="form-style" v-on:submit.prevent="getSearchResults">
+      <form class="form-style" v-on:submit.prevent="getSearchResults(selection)">
         <input class="search-bar" type="text" placeholder="Movie title here..." v-on:focus="searchTerm = ''" v-model="searchTerm" />
+        <select v-model="selection">
+          <option value=""> --Choose media-- </option>
+          <option value="movies">Movies</option>
+          <option value="tv shows" selected>TV Shows</option>
+        </select>
         <button class="search-button" type="submit" name="search-button">Search</button>
         </form>
+        <section>
+        <button class="cart-button">{{this.cart.length}}</button>
+        </section>
     </section>
     <MovieList :movies="movies" />
+    <a href="https://github.com/dnsomoano">
     <footer id="dev-footer">® Created by Daniel N Somoano</footer>
+    </a>
   </div>
 </template>
 
@@ -25,8 +35,12 @@ export default {
     MovieList
   },
   data: function() {
+    let fromStorage = localStorage.getItem("storedMovies");
+    fromStorage = fromStorage ? fromStorage.split(",") : [];
     return {
+      cart: fromStorage,
       searchTerm: "",
+      selection: "",
       movies: []
     };
   },
@@ -37,25 +51,40 @@ export default {
     testing: function() {
       // console.log("testing", this.searchTerm);
     },
-    getSearchResults: function() {
+    getSearchResults: function(selection) {
       // console.log("getting", this.searchTerm);
-      if (this.searchTerm) {
-        let URL = `https://api.themoviedb.org/3/search/movie?api_key=e99344bac0d2a5336621a8492eeb2e74&language=en-US&query=${
-          this.searchTerm
-        }&page=1&include_adult=true`;
-        // console.log(URL);
-        fetch(URL)
-          .then(resp => resp.json())
-          .then(data => {
-            console.log(data);
-            this.movies = data.results;
-          });
+      if ((selection = "tv shows")) {
+        if (this.searchTerm) {
+          let TV_URL = `https://api.themoviedb.org/3/search/tv?api_key=e99344bac0d2a5336621a8492eeb2e74&language=en-US&query=${
+            this.searchTerm
+          }&page=1&include_adult=true`;
+          // console.log(TV_URL);
+          fetch(TV_URL)
+            .then(resp => resp.json())
+            .then(data => {
+              console.log(data);
+              this.movies = data.results;
+            });
+        }
+      } else if ((selection = "movies")) {
+        if (this.searchTerm) {
+          let MOVIES_URL = `https://api.themoviedb.org/3/search/movies?api_key=e99344bac0d2a5336621a8492eeb2e74&language=en-US&query=${
+            this.searchTerm
+          }&page=1`;
+          // console.log(MOVIES_URL);
+          fetch(MOVIES_URL)
+            .then(resp => resp.json())
+            .then(data => {
+              // console.log(data);
+              this.movies = data.results;
+            });
+        }
       } else {
         const TRENDING = `https://api.themoviedb.org/3/trending/all/day?api_key=e99344bac0d2a5336621a8492eeb2e74`;
         fetch(TRENDING)
           .then(resp => resp.json())
           .then(data => {
-            console.log(data);
+            // console.log(data);
             this.movies = data.results;
           });
       }
@@ -114,7 +143,7 @@ export default {
 }
 
 .form-style {
-  background-color: #373636;
+  /* background-color: #373636; */
   margin-bottom: 1em;
 }
 
@@ -127,6 +156,13 @@ export default {
   background-color: #373636;
   border-radius: 0.2em;
   color: #e8eddf;
+}
+
+.cart-button {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 0.3em 1em 1em 1em;
 }
 
 #dev-footer {
