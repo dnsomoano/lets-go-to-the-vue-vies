@@ -1,15 +1,18 @@
 <template>
-<section class="movie-box">
-  <ul>
-    <li>
-      <header class="title-style">{{movieResult.title}}</header>
-      <img class="poster" :src="addImage(movieResult.poster_path)" />
-      <header class="release-date"><span class="subtext">Release Date:</span> {{movieResult.release_date}}</header>
-      <section class="box-synopsis">{{movieResult.overview}}</section>
-      <button class="save-button" type="submit" @click="addToSave(movieResult)">Save for Later</button>
-    </li>
-  </ul>
-</section>
+  <section class="movie-box">
+    <ul>
+      <li>
+        <header class="title-style">{{movieResult.title || movieResult.name}}</header>
+        <img class="poster" v-if="movieResult.poster_path" :src="addImage(movieResult.poster_path)" />
+        <header class="release-date">
+          <span class="subtext">Release Date:</span>
+          {{movieResult.release_date || movieResult.first_air_date}}
+        </header>
+        <section class="box-synopsis">{{movieResult.overview}}</section>
+        <button class="save-button" type="submit" @click="addToSave(movieResult)">Save for Later</button>
+      </li>
+    </ul>
+  </section>
 </template>
 
 <script>
